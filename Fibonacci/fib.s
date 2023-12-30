@@ -12,8 +12,8 @@ format_str_result: .asciz "Fibonacci Number: %d\n"
 print_num_to_file:
     push {lr}
     push {r0-r5}
-	
-	mov r5, r0
+    
+    mov r5, r0
 
     // Open the file for writing
     ldr r0, =filename
