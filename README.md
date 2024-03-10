@@ -31,3 +31,4 @@ arm-linux-gnueabi-gcc -static algorithm.o -o algorithm
 If you want more explanations of the algorithm, follow the accompanying video explanation on YouTube!
 
 - **Fibonacci Sequence:** [Using recursion in assembly to compute the fibonacci sequence](https://youtu.be/rGg94EDHl6I)
+- **Euclidean Algorithm:** [Computing the Euclidean Algorithm in raw ARM Assembly](https://youtu.be/665rzOSSxWA)
