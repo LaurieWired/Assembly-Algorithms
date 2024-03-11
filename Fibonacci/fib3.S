@@ -5,6 +5,8 @@
 //
 //  Expected Compile Command: gcc -o fib3 fib3.S
 //
+//  Program Enty: main
+//
 //  Purpose: Print the n'th fibonacci term to standard output
 //  Usage: ./fib3 n
 //
@@ -17,11 +19,11 @@
 
 format_str_result: .asciz "Fibonacci Number: %llu\n"
 usage_txt: .asciz "Usage: ./fib3 n \n\n\
-      n = Fibinacci term to output\n\n"
+      n = Fibonacci term to output.  Must be positive number.\n\n"
 
 .text
 
-start_fib: // %rsi = fibanocci_sequence ( %rsi'th term) BORKS %rdi, %rcx, %rdx
+fibonacci: // %rsi = fibanocci_sequence ( %rsi'th term) BORKS %rdi, %rcx, %rdx
 	// Base case: if n<=1, return n
 	cmp $1, %rsi
 	jle end_fib	
@@ -45,7 +47,7 @@ start_fib: // %rsi = fibanocci_sequence ( %rsi'th term) BORKS %rdi, %rcx, %rdx
 	movq $1, 8(%rax)
 	movq $2, %rcx
 
-fib_iterate: 
+fib_loop: 
 	// fib (n) = fib(n-1) + fib(n-2)
 	// 	Counter %rcx starts at 2 until desired n.
 	// 	Iterate until desired n (%rsi).
@@ -68,12 +70,12 @@ fib_iterate:
 
 	//Iterate.
 	inc %rcx
-	jmp fib_iterate
+	jmp fib_loop
 
 fib_finalize:
 	pushq (%rdx,%rcx,8) // Save the result
 	movq %rdx, %rdi
-	call free
+	call free  // ***  See!?  ***
 	popq %rsi //Put result in expected location
 
 end_fib:
@@ -87,7 +89,7 @@ print_fib:
 	ret
 
 usage_msg:
-	xorq %rax, %rax //Cause the internet said you had to.
+	xorq %rax, %rax
 	leaq usage_txt(%rip), %rdi
 	call printf
 	jmp exit
@@ -105,12 +107,14 @@ main:
 
 	//Run Fibonacci algorithm
 	movq %rax, %rsi
-	call start_fib  // fibonacci('n' = %rsi)
+	cmp $0, %rsi
+	jl usage_msg
+
+	call fibonacci  // fibonacci('n' = %rsi)
 	
-	call print_fib
+	call print_fib  // Output the result
 
 exit:
 	mov $231, %rax
 	mov $0, %rsi
 	syscall
-
