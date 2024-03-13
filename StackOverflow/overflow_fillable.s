@@ -100,8 +100,8 @@ skip_sp_print:
     pop {r0}
     
     // Increase depth by 1 before recursing
-    add r0, r0, #1
-    bl recurse
+    
+    // Your code goes here!
     
 recurse_exit:
     pop {pc}
