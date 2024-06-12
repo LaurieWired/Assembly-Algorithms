@@ -18,7 +18,7 @@ Here's how to get started:
 
 1. **Clone this repository:** `git clone https://github.com/LaurieWired/Assembly-Algorithms.git`
 2. **Pick an algorithm:** Browse the repository and choose an algorithm to sink your teeth into.
-3. **Use the default code or fill in your own version:** If you want to write your own version, simply go to the `algorithm_fillable.s` file and add your own code.
+3. **Use the default code or fill in your own version:** If you want to write your own version, simply go to the `fillable_algorithm.s` file and add your own code.
 4. **Generate the executable:** Assemble the algorithm file and create the executable. For ARMv7, use the following:
 ```
 arm-linux-gnueabi-as algorithm.s -o algorithm.o			# Update "algorithm" to the selected algorithm name
